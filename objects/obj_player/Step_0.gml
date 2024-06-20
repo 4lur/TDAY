@@ -1,28 +1,29 @@
 // Evento Step
-var moveX = 0;
-var moveY = 0;
+var move_x = 0;
+var move_y = 0;
+var move_speed = 4;
 
 // Verifica teclas de movimento
 if (keyboard_check(vk_left)) {
-    moveX = -1;
+    move_x -= move_speed;
 }
 if (keyboard_check(vk_right)) {
-    moveX = 1;
+    move_x += move_speed;
 }
 if (keyboard_check(vk_up)) {
-    moveY = -1;
+    move_y -= move_speed;
 }
 if (keyboard_check(vk_down)) {
-    moveY = 1;
+    move_y += move_speed;
 }
 
 // Normaliza o vetor de movimento para evitar movimento mais rápido na diagonal
-var move_length = sqrt(sqr(moveX) + sqr(moveY));
+var move_length = sqrt(sqr(move_x) + sqr(move_y));
 if (move_length != 0) {
-    moveX /= move_length;
-    moveY /= move_length;
+    move_x /= move_length;
+    move_y /= move_length;
 }
 
 // Atualiza a posição do personagem
-x += moveX * move_speed;
-y += moveY * move_speed;
+x += move_x * move_speed;
+y += move_y * move_speed;
