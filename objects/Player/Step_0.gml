@@ -1,15 +1,28 @@
-// Andar pro lado
+// Evento Step
+var moveX = 0;
+var moveY = 0;
 
-//variables
-hsp = 0;
-vsp = 0;
+// Verifica teclas de movimento
+if (keyboard_check(vk_left)) {
+    moveX = -1;
+}
+if (keyboard_check(vk_right)) {
+    moveX = 1;
+}
+if (keyboard_check(vk_up)) {
+    moveY = -1;
+}
+if (keyboard_check(vk_down)) {
+    moveY = 1;
+}
 
-//properties
-move_speed = 1;
+// Normaliza o vetor de movimento para evitar movimento mais rápido na diagonal
+var move_length = sqrt(sqr(moveX) + sqr(moveY));
+if (move_length != 0) {
+    moveX /= move_length;
+    moveY /= move_length;
+}
 
-//movement
-hsp = (keyboard_check(ord("D")) || keyboard_check(vk_right)) - (keyboard_check(ord("A")) || keyboard_check(vk_left));
-vsp = (keyboard_check(ord("S")) || keyboard_check(vk_down)) - (keyboard_check(ord("W")) || keyboard_check(vk_up));
-
-hsp *= move_speed;
-vsp *= move_speed;
+// Atualiza a posição do personagem
+x += moveX * move_speed;
+y += moveY * move_speed;
